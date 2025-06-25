@@ -1,10 +1,8 @@
 from fastapi import FastAPI
-from app.routers import drone
+from app.routers import drone, mission, waypoint
 
-app = FastAPI()
+app = FastAPI(title="Drone Survey System")
 
-app.include_router(drone.router, prefix="/drones", tags=["Drones"])
-
-@app.get("/")
-def root():
-    return {"message": "Drone Survey Backend is live!"}
+app.include_router(drone.router)
+app.include_router(mission.router)
+app.include_router(waypoint.router)
